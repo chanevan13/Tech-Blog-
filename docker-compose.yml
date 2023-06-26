@@ -1,0 +1,29 @@
+version: '3'
+services:
+  db:
+    image: mysql:latest
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: csqueeze-db
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: password
+    volumes:
+      - ./mysql-data:/var/lib/mysql
+  app:
+    ports:
+      - '3001:3001'
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        port: 3001
+    depends_on:
+      - db
+    environment:
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_USER: admin
+      DB_PASSWORD: password
+      DB_NAME: csqueeze-db
+

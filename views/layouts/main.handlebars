@@ -1,0 +1,29 @@
+<script>
+</script>
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>My Blog</title>
+        <link rel="stylesheet" href="/style.css" />
+    </head>
+    <div class="navbar">
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/dashboard">Dashboard</a></li>
+        </ul>
+        <ul>
+            {{#if user}}
+                <li><b>User:</b> {{user.username}}</li>
+                <li><a href="/logout">Logout</a></li>
+            {{else}}
+                <li><a href="/login">Login</a></li>
+            {{/if}}
+        </ul>
+    </div>
+    <body>
+    <div class="container">
+        {{{ body }}}
+    </div>
+    </body>
+</html>

@@ -1,0 +1,50 @@
+<h1>Dashboard</h1>
+<hr />
+
+<h3>Posts:</h3>
+{{#each user.BlogPosts}}
+<div class="card">
+  <h4>{{title}}</h4>
+    <button data-action="/post/{{id}}" data-method="DELETE">Delete</button>
+</div>
+{{/each}}
+
+<style>
+.flex-container > * {
+    flex-grow: 3;
+}
+.flex-container {
+  display: flex;
+  grid-gap: 1rem;
+  flex-wrap: wrap;
+}
+</style>
+
+<h3>Comments:</h3>
+<div class="flex-container">
+{{#each user.Comments}}
+    <div style="width: 10rem" class="card">
+        <a href="/post/{{BlogPostId}}/"><i><h4>{{BlogPost.title}}</h4></i></a>
+        <p>{{content}}</p>
+        <h4>{{toDateString createdAt}}</h4>
+    </div>
+{{/each}}
+</div>
+
+<hr />
+<a href="/editor"><button>New Post</button></a>
+
+<script>
+    const els = document.querySelectorAll("[data-action]");
+  Array.from(els).map(e => {
+      const event = e.getAttribute("data-listen") || "click";
+      const action = e.getAttribute("data-action");
+      const method = e.getAttribute("data-method");
+
+      if (!action || !method) {
+	  console.error("must provide http action and method");
+      }
+
+      e.addEventListener(event, (ev) => fetch(action, {method, headers: {}}));
+  });
+</script>

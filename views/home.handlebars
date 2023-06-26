@@ -1,0 +1,9 @@
+{{#each posts}}
+<div class="card">
+    <h2>{{ title }}</h2>
+    <h5>Posted {{ postDate }}</h5>
+    <p>{{ description }}</p>
+
+    <a href="/post/{{ id }}/">Read more...</a>
+</div>
+{{/each}}

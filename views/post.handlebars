@@ -1,0 +1,27 @@
+<h1>
+  {{ post.title }}
+</h1>
+<hr />
+<i>
+  {{ post.description }}
+</i>
+<br />
+<br />
+<p style="width:80%; margin-left:10%" >
+  {{ post.content }}
+</p>
+
+<h2>Comments:</h2>
+<form action="comment" method="POST">
+  <label><i>speak your mind...</i></label><br />
+  <textarea name="content"></textarea><br />
+  <button>submit</button>
+<form/>
+
+{{#each post.Comments}}
+  <div style="margin-left:3rem" class="card">
+    <h4>{{ User.username }}</h4>
+    <h5>{{ toDateString createdAt }}</h5>
+    <p>{{ content }}</p>
+  </div>
+{{/each}}
